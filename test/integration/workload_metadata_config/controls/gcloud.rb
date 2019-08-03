@@ -18,7 +18,7 @@ cluster_name = attribute('cluster_name')
 
 control "gcloud" do
   title "Google Compute Engine GKE configuration"
-  describe command("gcloud beta --project=#{project_id} container clusters --zone=#{location} describe #{cluster_name} --format=json --format=\"json(nodePools[0].config.workloadMetadataConfig.nodeMetadata)\"") do
+  describe command("gcloud --project=#{project_id} container clusters --zone=#{location} describe #{cluster_name} --format=json --format=\"json(nodePools[0].config.workloadMetadataConfig.nodeMetadata)\"") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq '' }
 
@@ -37,7 +37,7 @@ control "gcloud" do
     end
   end
 
-  describe command("gcloud beta --project=#{project_id} container clusters --zone=#{location} describe #{cluster_name} --format=json --format=\"json(nodeConfig.workloadMetadataConfig)\"") do
+  describe command("gcloud --project=#{project_id} container clusters --zone=#{location} describe #{cluster_name} --format=json --format=\"json(nodeConfig.workloadMetadataConfig)\"") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq '' }
 

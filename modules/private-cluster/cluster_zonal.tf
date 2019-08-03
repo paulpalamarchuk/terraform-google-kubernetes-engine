@@ -20,7 +20,7 @@
   Create zonal cluster
  *****************************************/
 resource "google_container_cluster" "zonal_primary" {
-  provider = google-beta
+  provider = google
 
   count           = var.regional ? 0 : 1
   name            = var.name
@@ -131,7 +131,7 @@ resource "google_container_cluster" "zonal_primary" {
   Create zonal node pools
  *****************************************/
 resource "google_container_node_pool" "zonal_pools" {
-  provider = google-beta
+  provider = google
   count    = var.regional ? 0 : length(var.node_pools)
   name     = var.node_pools[count.index]["name"]
   project  = var.project_id

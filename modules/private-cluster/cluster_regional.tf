@@ -20,7 +20,7 @@
   Create regional cluster
  *****************************************/
 resource "google_container_cluster" "primary" {
-  provider = google-beta
+  provider = google
 
   count           = var.regional ? 1 : 0
   name            = var.name
@@ -135,7 +135,7 @@ resource "google_container_cluster" "primary" {
   Create regional node pools
  *****************************************/
 resource "google_container_node_pool" "pools" {
-  provider = google-beta
+  provider = google
   count    = var.regional ? length(var.node_pools) : 0
   name     = var.node_pools[count.index]["name"]
   project  = var.project_id
